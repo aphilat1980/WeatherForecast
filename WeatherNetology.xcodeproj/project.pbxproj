@@ -7,25 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172123B52A92069000168C32 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172123B42A92069000168C32 /* SettingsViewController.swift */; };
 		1794EA062A68225800321AFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA052A68225800321AFF /* AppDelegate.swift */; };
 		1794EA082A68225800321AFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA072A68225800321AFF /* SceneDelegate.swift */; };
-		1794EA0A2A68225800321AFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA092A68225800321AFF /* ViewController.swift */; };
-		1794EA0D2A68225800321AFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1794EA0B2A68225800321AFF /* Main.storyboard */; };
 		1794EA102A68225800321AFF /* WeatherNetology.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA0E2A68225800321AFF /* WeatherNetology.xcdatamodeld */; };
 		1794EA122A68225900321AFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1794EA112A68225900321AFF /* Assets.xcassets */; };
 		1794EA152A68225900321AFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1794EA132A68225900321AFF /* LaunchScreen.storyboard */; };
+		1794EA1D2A68239E00321AFF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA1C2A68239E00321AFF /* OnboardingViewController.swift */; };
+		1794EA1F2A682D5400321AFF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA1E2A682D5400321AFF /* NetworkManager.swift */; };
+		1794EA212A6D6CF700321AFF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA202A6D6CF700321AFF /* DataManager.swift */; };
+		1794EA232A6EC48100321AFF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA222A6EC48100321AFF /* MainViewController.swift */; };
+		1794EA272A7004E800321AFF /* SecondSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA262A7004E800321AFF /* SecondSectionCollectionViewCell.swift */; };
+		1794EA292A70054C00321AFF /* SecondSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA282A70054C00321AFF /* SecondSectionTableViewCell.swift */; };
+		1794EA2B2A701D8A00321AFF /* FirstSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA2A2A701D8A00321AFF /* FirstSectionCollectionViewCell.swift */; };
+		1794EA2D2A701DAD00321AFF /* FirstSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA2C2A701DAD00321AFF /* FirstSectionTableViewCell.swift */; };
+		1794EA2F2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA2E2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift */; };
+		1794EA342A77F0DD00321AFF /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1794EA332A77F0DD00321AFF /* Rubik-Medium.ttf */; };
+		1794EA362A77F41D00321AFF /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1794EA352A77F41C00321AFF /* Rubik-Regular.ttf */; };
+		1794EA382A8A4FA300321AFF /* More24HoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA372A8A4FA300321AFF /* More24HoursViewController.swift */; };
+		1794EA3A2A8A682300321AFF /* More24HoursFirstSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA392A8A682300321AFF /* More24HoursFirstSectionTableViewCell.swift */; };
+		1794EA3C2A8A693000321AFF /* More24HoursSecondSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA3B2A8A693000321AFF /* More24HoursSecondSectionTableViewCell.swift */; };
+		1794EA3E2A8B675700321AFF /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA3D2A8B675700321AFF /* DailyViewController.swift */; };
+		1794EA402A8B6D5B00321AFF /* DailyFirstSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA3F2A8B6D5B00321AFF /* DailyFirstSectionTableViewCell.swift */; };
+		1794EA422A8B6D7B00321AFF /* DailySecondSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA412A8B6D7B00321AFF /* DailySecondSectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		172123B42A92069000168C32 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1794EA022A68225800321AFF /* WeatherNetology.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherNetology.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1794EA052A68225800321AFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1794EA072A68225800321AFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1794EA092A68225800321AFF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		1794EA0C2A68225800321AFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1794EA0F2A68225800321AFF /* WeatherNetology.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherNetology.xcdatamodel; sourceTree = "<group>"; };
 		1794EA112A68225900321AFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1794EA142A68225900321AFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1794EA162A68225900321AFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1794EA1C2A68239E00321AFF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		1794EA1E2A682D5400321AFF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1794EA202A6D6CF700321AFF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		1794EA222A6EC48100321AFF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1794EA262A7004E800321AFF /* SecondSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		1794EA282A70054C00321AFF /* SecondSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA2A2A701D8A00321AFF /* FirstSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		1794EA2C2A701DAD00321AFF /* FirstSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA2E2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA332A77F0DD00321AFF /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Medium.ttf"; path = "../../../../Downloads/rubik/Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		1794EA352A77F41C00321AFF /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Regular.ttf"; path = "../../../../Downloads/rubik/Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		1794EA372A8A4FA300321AFF /* More24HoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More24HoursViewController.swift; sourceTree = "<group>"; };
+		1794EA392A8A682300321AFF /* More24HoursFirstSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More24HoursFirstSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA3B2A8A693000321AFF /* More24HoursSecondSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = More24HoursSecondSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA3D2A8B675700321AFF /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
+		1794EA3F2A8B6D5B00321AFF /* DailyFirstSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyFirstSectionTableViewCell.swift; sourceTree = "<group>"; };
+		1794EA412A8B6D7B00321AFF /* DailySecondSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySecondSectionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +92,62 @@
 			children = (
 				1794EA052A68225800321AFF /* AppDelegate.swift */,
 				1794EA072A68225800321AFF /* SceneDelegate.swift */,
-				1794EA092A68225800321AFF /* ViewController.swift */,
-				1794EA0B2A68225800321AFF /* Main.storyboard */,
 				1794EA112A68225900321AFF /* Assets.xcassets */,
+				1794EA322A77F0AA00321AFF /* Fonts */,
 				1794EA132A68225900321AFF /* LaunchScreen.storyboard */,
-				1794EA162A68225900321AFF /* Info.plist */,
+				1794EA1C2A68239E00321AFF /* OnboardingViewController.swift */,
+				172123B42A92069000168C32 /* SettingsViewController.swift */,
+				1794EA1E2A682D5400321AFF /* NetworkManager.swift */,
+				1794EA202A6D6CF700321AFF /* DataManager.swift */,
+				17EED7322A8F252F008B9EBB /* Main */,
+				17EED7332A8F256F008B9EBB /* More24Hours */,
+				17EED7342A8F259F008B9EBB /* Daily */,
 				1794EA0E2A68225800321AFF /* WeatherNetology.xcdatamodeld */,
+				1794EA162A68225900321AFF /* Info.plist */,
 			);
 			path = WeatherNetology;
+			sourceTree = "<group>";
+		};
+		1794EA322A77F0AA00321AFF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1794EA352A77F41C00321AFF /* Rubik-Regular.ttf */,
+				1794EA332A77F0DD00321AFF /* Rubik-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		17EED7322A8F252F008B9EBB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1794EA222A6EC48100321AFF /* MainViewController.swift */,
+				1794EA2C2A701DAD00321AFF /* FirstSectionTableViewCell.swift */,
+				1794EA2A2A701D8A00321AFF /* FirstSectionCollectionViewCell.swift */,
+				1794EA282A70054C00321AFF /* SecondSectionTableViewCell.swift */,
+				1794EA262A7004E800321AFF /* SecondSectionCollectionViewCell.swift */,
+				1794EA2E2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		17EED7332A8F256F008B9EBB /* More24Hours */ = {
+			isa = PBXGroup;
+			children = (
+				1794EA372A8A4FA300321AFF /* More24HoursViewController.swift */,
+				1794EA392A8A682300321AFF /* More24HoursFirstSectionTableViewCell.swift */,
+				1794EA3B2A8A693000321AFF /* More24HoursSecondSectionTableViewCell.swift */,
+			);
+			path = More24Hours;
+			sourceTree = "<group>";
+		};
+		17EED7342A8F259F008B9EBB /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				1794EA3D2A8B675700321AFF /* DailyViewController.swift */,
+				1794EA3F2A8B6D5B00321AFF /* DailyFirstSectionTableViewCell.swift */,
+				1794EA412A8B6D7B00321AFF /* DailySecondSectionTableViewCell.swift */,
+			);
+			path = Daily;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,9 +208,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1794EA342A77F0DD00321AFF /* Rubik-Medium.ttf in Resources */,
+				1794EA362A77F41D00321AFF /* Rubik-Regular.ttf in Resources */,
 				1794EA152A68225900321AFF /* LaunchScreen.storyboard in Resources */,
 				1794EA122A68225900321AFF /* Assets.xcassets in Resources */,
-				1794EA0D2A68225800321AFF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,24 +222,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1794EA0A2A68225800321AFF /* ViewController.swift in Sources */,
+				1794EA232A6EC48100321AFF /* MainViewController.swift in Sources */,
+				1794EA2F2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift in Sources */,
+				1794EA272A7004E800321AFF /* SecondSectionCollectionViewCell.swift in Sources */,
+				1794EA422A8B6D7B00321AFF /* DailySecondSectionTableViewCell.swift in Sources */,
+				1794EA3A2A8A682300321AFF /* More24HoursFirstSectionTableViewCell.swift in Sources */,
+				172123B52A92069000168C32 /* SettingsViewController.swift in Sources */,
+				1794EA3C2A8A693000321AFF /* More24HoursSecondSectionTableViewCell.swift in Sources */,
+				1794EA3E2A8B675700321AFF /* DailyViewController.swift in Sources */,
 				1794EA102A68225800321AFF /* WeatherNetology.xcdatamodeld in Sources */,
+				1794EA212A6D6CF700321AFF /* DataManager.swift in Sources */,
+				1794EA402A8B6D5B00321AFF /* DailyFirstSectionTableViewCell.swift in Sources */,
 				1794EA062A68225800321AFF /* AppDelegate.swift in Sources */,
+				1794EA1F2A682D5400321AFF /* NetworkManager.swift in Sources */,
 				1794EA082A68225800321AFF /* SceneDelegate.swift in Sources */,
+				1794EA382A8A4FA300321AFF /* More24HoursViewController.swift in Sources */,
+				1794EA2D2A701DAD00321AFF /* FirstSectionTableViewCell.swift in Sources */,
+				1794EA2B2A701D8A00321AFF /* FirstSectionCollectionViewCell.swift in Sources */,
+				1794EA292A70054C00321AFF /* SecondSectionTableViewCell.swift in Sources */,
+				1794EA1D2A68239E00321AFF /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1794EA0B2A68225800321AFF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1794EA0C2A68225800321AFF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1794EA132A68225900321AFF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,7 +383,6 @@
 				INFOPLIST_FILE = WeatherNetology/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,7 +409,6 @@
 				INFOPLIST_FILE = WeatherNetology/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
