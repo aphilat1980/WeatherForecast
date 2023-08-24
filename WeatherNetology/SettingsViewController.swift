@@ -9,8 +9,8 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    //completion для обновления секций таблицы в mainViewController
     var completion: (()->())?
-    
     
     private lazy var backView: UIScrollView = {
         var view = UIScrollView()
@@ -21,9 +21,7 @@ class SettingsViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    
-    
+
     private lazy var cloud1Icon: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "cloud1")
@@ -46,10 +44,8 @@ class SettingsViewController: UIViewController {
         return view
     }()
     
-    
     private lazy var backSettingsView: UIView = {
         var view = UIView()
-        
         view.layer.backgroundColor = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1).cgColor
         view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -60,19 +56,14 @@ class SettingsViewController: UIViewController {
         var view = UISwitch()
         view.onTintColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
         if UserDefaults.standard.string(forKey: "temperature")! == "F" {
-            view.setOn(true, animated: true)
-        }
-        //view.setOn(true, animated: true)
+            view.setOn(true, animated: true)}
         view.addTarget(self, action: #selector(switchTemperature(_: )), for: .valueChanged)
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel ()
-    
         label.textColor = UIColor(red: 0.538, green: 0.513, blue: 0.513, alpha: 1)
         label.font = UIFont(name: "Rubik-Regular", size: 16)
         label.text = "Температура: On - F, Off - C"
@@ -88,30 +79,43 @@ class SettingsViewController: UIViewController {
         return label
     }()
     
+    private lazy var windSpeedLabel: UILabel = {
+        let label = UILabel ()
+        label.textColor = UIColor(red: 0.538, green: 0.513, blue: 0.513, alpha: 1)
+        label.font = UIFont(name: "Rubik-Regular", size: 16)
+        label.text = "Скорость ветра: \nOn - м/с, Off - км/ч"
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    
-   
-    
+    private lazy var windSpeedSwitch: UISwitch = {
+        var view = UISwitch()
+        view.onTintColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
+        if UserDefaults.standard.string(forKey:"windspeed")! == "M" {
+            view.setOn(true, animated: true)}
+        view.addTarget(self, action: #selector(switchWindSpeed(_: )), for: .valueChanged)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        view.backgroundColor = .white
         view.addSubview(backView)
         backView.addSubview(cloud1Icon)
         backView.addSubview(cloud2Icon)
         backView.addSubview(cloud3Icon)
         backView.addSubview(backSettingsView)
-        backView.addSubview(gradusSwitch)
-        backView.addSubview(settingsLabel)
-        backView.addSubview(temperatureLabel)
+        backSettingsView.addSubview(gradusSwitch)
+        backSettingsView.addSubview(settingsLabel)
+        backSettingsView.addSubview(temperatureLabel)
+        backSettingsView.addSubview(windSpeedLabel)
+        backSettingsView.addSubview(windSpeedSwitch)
         setupConstraints()
-        print(UserDefaults.standard.string(forKey: "temperature"))
-        
-        view.backgroundColor = .white
 
-        
     }
     
     
@@ -154,11 +158,12 @@ class SettingsViewController: UIViewController {
             temperatureLabel.leadingAnchor.constraint(equalTo: backSettingsView.leadingAnchor, constant: 20),
             temperatureLabel.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant: 20),
             
+            windSpeedLabel.leadingAnchor.constraint(equalTo: backSettingsView.leadingAnchor, constant: 20),
+            windSpeedLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30),
             
-            
-            
+            windSpeedSwitch.trailingAnchor.constraint(equalTo: backSettingsView.trailingAnchor, constant: -10),
+            windSpeedSwitch.centerYAnchor.constraint(equalTo: windSpeedLabel.centerYAnchor),
         ])
-        
     }
     
     @objc private func switchTemperature(_ sender:UISwitch) {
@@ -169,9 +174,17 @@ class SettingsViewController: UIViewController {
             UserDefaults.standard.set("C", forKey: "temperature")
         }
         completion?()
-        print (UserDefaults.standard.string(forKey: "temperature"))
     }
     
-
+    
+    @objc private func switchWindSpeed(_ sender:UISwitch) {
+        
+        if (sender.isOn == true) {
+            UserDefaults.standard.set("M", forKey: "windspeed")
+        } else {
+            UserDefaults.standard.set("K", forKey: "windspeed")
+        }
+        completion?()
+    }
 }
 

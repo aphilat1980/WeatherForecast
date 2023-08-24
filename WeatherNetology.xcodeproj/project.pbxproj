@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		172123B52A92069000168C32 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172123B42A92069000168C32 /* SettingsViewController.swift */; };
+		172123B72A96626200168C32 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172123B62A96626200168C32 /* Chart.swift */; };
 		1794EA062A68225800321AFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA052A68225800321AFF /* AppDelegate.swift */; };
 		1794EA082A68225800321AFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA072A68225800321AFF /* SceneDelegate.swift */; };
 		1794EA102A68225800321AFF /* WeatherNetology.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1794EA0E2A68225800321AFF /* WeatherNetology.xcdatamodeld */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		172123B42A92069000168C32 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		172123B62A96626200168C32 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		1794EA022A68225800321AFF /* WeatherNetology.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherNetology.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1794EA052A68225800321AFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1794EA072A68225800321AFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		1794EA042A68225800321AFF /* WeatherNetology */ = {
 			isa = PBXGroup;
 			children = (
+				172123B62A96626200168C32 /* Chart.swift */,
 				1794EA052A68225800321AFF /* AppDelegate.swift */,
 				1794EA072A68225800321AFF /* SceneDelegate.swift */,
 				1794EA112A68225900321AFF /* Assets.xcassets */,
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172123B72A96626200168C32 /* Chart.swift in Sources */,
 				1794EA232A6EC48100321AFF /* MainViewController.swift in Sources */,
 				1794EA2F2A72A0EC00321AFF /* ThirdSectionTableViewCell.swift in Sources */,
 				1794EA272A7004E800321AFF /* SecondSectionCollectionViewCell.swift in Sources */,

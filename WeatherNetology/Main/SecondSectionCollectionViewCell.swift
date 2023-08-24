@@ -20,25 +20,14 @@ class SecondSectionCollectionViewCell: UICollectionViewCell {
     var temperature: UILabel = {
         let label = UILabel ()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1)
         label.font = UIFont(name: "Rubik-Regular", size: 16)
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 0.95
-        label.textAlignment = .right
-        label.attributedText = NSMutableAttributedString(string: "23", attributes: [NSAttributedString.Key.kern: 0.32, NSAttributedString.Key.paragraphStyle: paragraphStyle])
         return label
     }()
     
     var date: UILabel = {
         let label = UILabel ()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(red: 0.154, green: 0.152, blue: 0.135, alpha: 1)
         label.font = UIFont(name: "Rubik-Regular", size: 14)
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.08
-        label.textAlignment = .right
-        label.attributedText = NSMutableAttributedString(string: "12:00", attributes: [NSAttributedString.Key.kern: 0.28, NSAttributedString.Key.paragraphStyle: paragraphStyle])
-        label.textColor = .black
         return label
     }()
     
@@ -52,15 +41,20 @@ class SecondSectionCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private lazy var weatherIcon: UIImageView = {
+        var view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.backgroundColor = .white
         contentView.addSubview(backView)
         backView.addSubview(temperature)
         backView.addSubview(date)
-        //backView.addSubview(date)
+        backView.addSubview(weatherIcon)
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -77,13 +71,16 @@ class SecondSectionCollectionViewCell: UICollectionViewCell {
             temperature.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
             temperature.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -5),
             date.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
-           date.topAnchor.constraint(equalTo: backView.topAnchor, constant: 15)
-            
+            date.topAnchor.constraint(equalTo: backView.topAnchor, constant: 15),
+            weatherIcon.centerXAnchor.constraint(equalTo: backView.centerXAnchor),
+            weatherIcon.topAnchor.constraint(equalTo: date.bottomAnchor, constant: -6),
+            weatherIcon.heightAnchor.constraint(equalToConstant: 35),
+            weatherIcon.widthAnchor.constraint(equalToConstant: 35)
         ])
-        
     }
     
     public func configure (with weather: Weather) {
+        
         if UserDefaults.standard.string(forKey: "temperature") == "C" {
             self.temperature.text = "\(Int(weather.tempCurrent))°"
         } else {
@@ -91,8 +88,21 @@ class SecondSectionCollectionViewCell: UICollectionViewCell {
         }
         let date = NSDate(timeIntervalSince1970: TimeInterval(weather.dateSince1970))
         self.date.text = formatter.string(from: date as Date)
+        weatherIcon.load(url: URL(string: "https://openweathermap.org/img/wn/\(weather.weatherIcon!).png")!)
+        }
     }
-    
-    
-    
+
+//расширение для UIImageView для загрузки картинок по url, при этом способа аналогично загрузить иконки погоды с api yandex c расширением svg - не нашел!! Пришлось добавлять их в assets. Иконки с расширениенм png с openweather загружаются нормально
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

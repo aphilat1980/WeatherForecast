@@ -18,23 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow (windowScene: scene)
         
+        
         if DataManager.shared.cities.count == 0 {
-            
             let onboardiingViewController = OnboardingViewController()
             window.rootViewController = UINavigationController(rootViewController: onboardiingViewController)
-            
         } else {
-            
             let mainViewController = MainViewController()
             window.rootViewController = UINavigationController(rootViewController: mainViewController)
         }
-        //UserDefaults.standard.set("C", forKey: "temperature")
-        
         
         window.makeKeyAndVisible()
-        
         self.window = window
-
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

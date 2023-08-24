@@ -9,20 +9,13 @@ import UIKit
 import CoreLocation
 
 class OnboardingViewController: UIViewController {
-    
-    //let networkManager = NetworkManager()
-    //let dataManager = DataManager()
-    
+   
     let locationManager = CLLocationManager()
     
 
     private lazy var backView: UIScrollView = {
         var view = UIScrollView()
         view.layer.backgroundColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1).cgColor
-        view.isScrollEnabled = true
-        view.showsVerticalScrollIndicator = true
-        //view.layer.cornerRadius = 20
-        //view.contentSize =
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,14 +27,12 @@ class OnboardingViewController: UIViewController {
         return contentView
     }()
     
-    
     private lazy var onboardingIcon: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "onboarding")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var firstLabel: UILabel = {
         var view = UILabel()
@@ -76,7 +67,6 @@ class OnboardingViewController: UIViewController {
         return view
     }()
     
-    
     private lazy var myLocationLabel: UILabel = {
         var view = UILabel()
         view.textColor = UIColor(red: 0.992, green: 0.986, blue: 0.963, alpha: 1)
@@ -85,33 +75,28 @@ class OnboardingViewController: UIViewController {
         view.isUserInteractionEnabled = true
         let guestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(labelClicked(_:)))
         view.addGestureRecognizer(guestureRecognizer)
-
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(backView)
         backView.addSubview(contentView)
-        
         contentView.addSubview(onboardingIcon)
         contentView.addSubview(firstLabel)
         contentView.addSubview(secondLabel)
         contentView.addSubview(buttonGeolocation)
         contentView.addSubview(myLocationLabel)
     
-
         view.backgroundColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
-        
         setupConstraints()
         
         locationManager.requestWhenInUseAuthorization()
         
+        //обрабатываю Алерт в случае ошибки загрузки города
         DataManager.shared.networkManager.alertCompletion = {
             DispatchQueue.main.async {
                 let alert = UIAlertController (title: "Сбой загрузки", message: "Попробуйте снова", preferredStyle: .alert)
@@ -120,16 +105,9 @@ class OnboardingViewController: UIViewController {
                 self.present(alert, animated: true)
             }
         }
-    
-        
     }
     
-   
-    
-    
-    
-    
-    private func setupConstraints() {
+   private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             backView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
@@ -142,8 +120,6 @@ class OnboardingViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: backView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: backView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: backView.bottomAnchor),
-            //contentView.heightAnchor.constraint(equalTo: backView.heightAnchor),
-            
             
             onboardingIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 140),
             onboardingIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 20),
@@ -164,13 +140,8 @@ class OnboardingViewController: UIViewController {
             buttonGeolocation.heightAnchor.constraint(equalToConstant: 40),
             
             myLocationLabel.topAnchor.constraint(equalTo: buttonGeolocation.bottomAnchor, constant: 25),
-            //myLocationLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -15),
             myLocationLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             myLocationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
-            
-            
-            
-            
         ])
     }
     
@@ -181,23 +152,21 @@ class OnboardingViewController: UIViewController {
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager.delegate = self
                 self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-                self.locationManager.distanceFilter = 2000
+                self.locationManager.distanceFilter = 1000
                 self.locationManager.startUpdatingLocation()
             }
         }
-        
-        
-        
     }
+    
     
     @objc func labelClicked(_ sender: Any) {
-            
+        
         let mainViewController = MainViewController()
         self.navigationController?.pushViewController(mainViewController, animated: true)
-        
-        
     }
     
+    
+    //функция преобразхования координат в название города
     func fetchCityAndCountry(from location: CLLocation, completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             completion(placemarks?.first?.locality,
@@ -206,36 +175,29 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-
 }
 
 extension OnboardingViewController: CLLocationManagerDelegate {
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let location: CLLocation = manager.location else { return }
         self.locationManager.stopUpdatingLocation()
             fetchCityAndCountry(from: location) { city, country, error in
-                guard let city = city, let country = country, error == nil else { return }
-                
-                print(city + ", " + country)
-                
+                guard let city = city, let _ = country, error == nil else { return }
+                //если преобразовали координаты в город, то загружаем погоду
                 DataManager.shared.loadWeather(city: city) {cityLoaded in
                     DataManager.shared.loadDailyWeather(city: cityLoaded!) {
-                        
                         DataManager.shared.fetchCities()
+                        DataManager.shared.fetchCurrentWeather(city: cityLoaded!)
                         DataManager.shared.fetchWeather(city: cityLoaded!)
                         DataManager.shared.fetchDailyWeather(city: cityLoaded!)
                         let mainViewController = MainViewController()
                         self.navigationController?.pushViewController(mainViewController, animated: true)
-                        
-                    }
+                        }
                 }
         }
     }
-
-    
 }
 
 

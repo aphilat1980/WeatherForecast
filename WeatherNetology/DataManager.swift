@@ -11,11 +11,18 @@ import UIKit
 
 class DataManager {
     
+    //использовал синглтон для работы с массивами погоды и городов
     static let shared = DataManager()
     
+    //массив городов
     var cities:[City] = []
+    //массив 3 часовой погоды
     var weathers: [Weather] = []
+    //массив дневной погоды
     var dailyWeather: [DailyWeather] = []
+    //массив текущей погоды - по сути нулевой элемент массива weathers
+    var currentWeather: [CurrentWeather] = []
+    
     var networkManager = NetworkManager()
     
 private var context = (UIApplication.shared.delegate as? AppDelegate)!.persistentContainer.viewContext
@@ -24,75 +31,83 @@ private var context = (UIApplication.shared.delegate as? AppDelegate)!.persisten
     var completionForSecondSection: (()->())?
     var completionForThirdSection: (()->())?
     
-
-
-    //var postsUpdate: (()-> ())? //передача во вью состояния при сохранении поста
-    //var postDublicate: (()->())? //передача во вью состояния при дублировании поста
-
+    
     init () {
         fetchCities()
     }
     
-    
+    //функция создания массива городов из coredata
     func fetchCities () {
-        
         let fetchRequest1 = City.fetchRequest()
         cities = (try? context.fetch(fetchRequest1)) ?? []
-       completionForFirstSection?()
-        
+        completionForFirstSection?()
     }
     
+    //функция создания массива 3хчасового прогноза из coredata
     func fetchWeather (city: City) {
-        
         let fetchRequest = Weather.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateSince1970", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "city == %@", city)
         weathers = (try? context.fetch(fetchRequest)) ?? []
         completionForSecondSection?()
-        //completionForThirdSection?()
-        
     }
     
-    
+    //функция создания дневной погоды из coredata
     func fetchDailyWeather (city: City) {
-        
         let fetchRequest = DailyWeather.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateSince1970", ascending: true)]
         fetchRequest.predicate = NSPredicate(format: "city == %@", city)
         dailyWeather = (try? context.fetch(fetchRequest)) ?? []
-        //completionForSecondSection?()
         completionForThirdSection?()
-        
-        
     }
     
-   
+    //функция создания массива текущей погоды из coredata
+    func fetchCurrentWeather (city: City) {
+        let fetchRequest = CurrentWeather.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateSince1970", ascending: true)]
+        fetchRequest.predicate = NSPredicate(format: "city == %@", city)
+        currentWeather = (try? context.fetch(fetchRequest)) ?? []
+        completionForFirstSection?()
+    }
     
-    
+   //функция загрузки с openweathermap
     func loadWeather (city: String, completion: @escaping (_ cityLoaded: City?)->()) {
         
         networkManager.downloadWeatherForecast(city: city) {weatherForecast in
             
             DispatchQueue.main.async {
+                //делаю проверку на наличие города в coredata
                 var existingCity: City?
                 var contains = false
                 for city in self.cities {
                     if city.name == weatherForecast?.city.name {
                         existingCity = city
-                        /*for weather in (existingCity.weathers?.sortedArray(using: []) as?[Weather]) ?? [] {
-                            self.context.delete(weather)
-                            try? self.context.save()
-                        }*/
                         contains = true
                     }
                 }
-                
+                //если город уже есть, то просто обновляем данные и массивы погоды
                 if contains == true {
-                    print ("такой город есть")
+                    //удаляем данные существующие по 3часовой погоде и текущей погоде
                     for weather in (existingCity!.weathers?.sortedArray(using: []) as?[Weather]) ?? [] {
                         self.context.delete(weather)
                         try? self.context.save()
                     }
+                    self.context.delete(existingCity!.currentWeather!)
+                    try? self.context.save()
+                    //создаем новые данные в coredata
+                    let currentWeather = CurrentWeather(context: self.context)
+                    currentWeather.dateSince1970 = Int64((weatherForecast?.list[0].dt)!)
+                    currentWeather.currentCloudness = Int64((weatherForecast?.list[0].clouds.all)!)
+                    currentWeather.currentDescription = weatherForecast?.list[0].weather[0].description
+                    currentWeather.currentTemperature = (weatherForecast?.list[0].main.temp)!
+                    currentWeather.currentMaxTemp = (weatherForecast?.list[0].main.tempMax)!
+                    currentWeather.currentMinTemp = (weatherForecast?.list[0].main.tempMin)!
+                    currentWeather.currentHumidity = Int64((weatherForecast?.list[0].main.humidity)!)
+                    currentWeather.currentWindSpeed = (weatherForecast?.list[0].wind.speed)!
+                    currentWeather.currentSunrise = Int64((weatherForecast?.city.sunrise)!)
+                    currentWeather.currentSunset = Int64((weatherForecast?.city.sunset)!)
+                    currentWeather.city = existingCity
+                    
                     for i in weatherForecast!.list {
                         let weather = Weather(context: self.context)
                         weather.date = i.dt_txt
@@ -104,27 +119,34 @@ private var context = (UIApplication.shared.delegate as? AppDelegate)!.persisten
                         weather.tempMin = i.main.tempMin
                         weather.weatherDescription = i.weather[0].description
                         weather.weatherIcon = i.weather[0].icon
+                        weather.probPrecipitation = i.pop
+                        weather.windSpeed = i.wind.speed
+                        weather.cloudness = Int64(i.clouds.all)
                         weather.city = existingCity
-                        //print(weather.city?.name)
                     }
                     try? self.context.save()
                     completion(existingCity)
-                    //self.fetchCities()
-                    //self.fetchWeather(city: existingCity!)
-                
                     
-                    
-                } else {
+                } else {//если города еще нет в coredata
                     
                     let newCityForecast = City(context: self.context)
                     newCityForecast.name = weatherForecast?.city.name
                     newCityForecast.lat = (weatherForecast?.city.coord.lat)!
                     newCityForecast.lon = (weatherForecast?.city.coord.lon)!
-                    newCityForecast.currentTemp = (weatherForecast?.list[0].main.temp)!
-                    newCityForecast.currentMaxTemp = (weatherForecast?.list[0].main.tempMax)!
-                    newCityForecast.currentMinTemp = (weatherForecast?.list[0].main.tempMin)!
-                    newCityForecast.currentDescription = (weatherForecast?.list[0].weather[0].description)!
-                    newCityForecast.currentHumidity = Int16((weatherForecast?.list[0].main.humidity)!)
+    
+                    let currentWeather = CurrentWeather(context: self.context)
+                    currentWeather.dateSince1970 = Int64((weatherForecast?.list[0].dt)!)
+                    currentWeather.currentCloudness = Int64((weatherForecast?.list[0].clouds.all)!)
+                    currentWeather.currentDescription = weatherForecast?.list[0].weather[0].description
+                    currentWeather.currentTemperature = (weatherForecast?.list[0].main.temp)!
+                    currentWeather.currentMaxTemp = (weatherForecast?.list[0].main.tempMax)!
+                    currentWeather.currentMinTemp = (weatherForecast?.list[0].main.tempMin)!
+                    currentWeather.currentHumidity = Int64((weatherForecast?.list[0].main.humidity)!)
+                    currentWeather.currentWindSpeed = (weatherForecast?.list[0].wind.speed)!
+                    currentWeather.currentSunrise = Int64((weatherForecast?.city.sunrise)!)
+                    currentWeather.currentSunset = Int64((weatherForecast?.city.sunset)!)
+                    currentWeather.city = newCityForecast
+                    
                     for i in weatherForecast!.list {
                         let weather = Weather(context: self.context)
                         weather.date = i.dt_txt
@@ -136,31 +158,30 @@ private var context = (UIApplication.shared.delegate as? AppDelegate)!.persisten
                         weather.tempMin = i.main.tempMin
                         weather.weatherDescription = i.weather[0].description
                         weather.weatherIcon = i.weather[0].icon
+                        weather.probPrecipitation = i.pop
+                        weather.windSpeed = i.wind.speed
+                        weather.cloudness = Int64(i.clouds.all)
                         weather.city = newCityForecast
-                        //print(weather.city?.name)
                     }
                     try? self.context.save()
                     completion(newCityForecast)
-                    //self.fetchCities()
-                    //self.fetchWeather(city: newCityForecast)
-                    
                 }
             }
         }
-        
     }
         
-
+//функция загрузки с Яндекс api
     func loadDailyWeather (city: City, completion: @escaping ()->()) {
         
         networkManager.downloadDailyWeather(city: city) {dailyWeather in
             
             DispatchQueue.main.async {
-                //delete current data
+                //удаляем текущие данные
                 for weather in (city.dailyWeather?.sortedArray(using: []) as?[DailyWeather]) ?? [] {
                         self.context.delete(weather)
                         try? self.context.save()
                 }
+                //создаем новые объекты в coredata
                 for i in dailyWeather!.forecasts {
                     let dailyWeather = DailyWeather(context: self.context)
                     dailyWeather.date = i.date
@@ -197,16 +218,13 @@ private var context = (UIApplication.shared.delegate as? AppDelegate)!.persisten
                     dailyWeather.city = city
                 }
                 try? self.context.save()
-                //if DataManager.shared.cities.count == 1 {
-                //self.fetchDailyWeather(city: city)
-                //}
                 completion()
             }
         }
     }
     
     
-    
+    //функция удаления объектов из сoredata
     func deleteAllData(_ entity:String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false

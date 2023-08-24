@@ -9,47 +9,45 @@ import Foundation
 
 class NetworkManager {
     
+    //alert в случае ошибки загрузки города
     var alertCompletion: (()->())?
     
+    //поскольку не нашел бесплатных api для выполнения задач курсовой работы, использовыал вариант загрузки данных с openweathermap 3часовой прогноз и текущий прогноз и данных с api yandex по дневному прогнозу
+    
+    //функция загрузки данных с openweathermap
     func downloadWeatherForecast (city: String, completion: @escaping (_ weatherForecast: WeatherForecast?)->()) {
         
         let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&appid=c3258abf5f8c7bec4f1d0bc68ba132ee&units=metric&lang=ru".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: urlString)!
         let session = URLSession(configuration: .default)
+        
         let dataTask = session.dataTask(with: url) {data, responce, error in
             if let error {
                 print (error.localizedDescription)
                 self.alertCompletion?()
-                return
-            }
+                return}
             
             if (responce as? HTTPURLResponse)?.statusCode != 200 {
                 print ("responce != 200")
                 self.alertCompletion?()
-                return
-            }
+                return}
             
             guard let data else {
                 print ("data is nil")
-                return
-            }
+                return}
             
             do {
                 let decoder = JSONDecoder()
                 let item = try decoder.decode(WeatherForecast.self, from: data)
                 completion(item)
-                
             } catch {
                 self.alertCompletion?()
-                print (error)
-            }
+                print (error)}
         }
         dataTask.resume()
     }
     
-    
-    
-    
+    //функция загрузки данных с api Яндекса - дневной прогноз
     func downloadDailyWeather (city: City, completion: @escaping (_ weatherDailyForecast: WeatherDailyForecast?)->()) {
         
        let headers = ["X-Yandex-API-Key": "e3e02def-e186-4908-9f6f-584dfca9e50a"]
@@ -60,44 +58,37 @@ class NetworkManager {
         request.allHTTPHeaderFields = headers
         let session = URLSession.shared
         
-        
-        
         let dataTask = session.dataTask(with: request as URLRequest) {data, responce, error in
             if let error {
                 print (error.localizedDescription)
                 self.alertCompletion?()
-                return
-            }
+                return}
             
             if (responce as? HTTPURLResponse)?.statusCode != 200 {
-                //print(responce.debugDescription)
                 print ("responce != 200")
                 self.alertCompletion?()
-                return
-            }
+                return}
             
             guard let data else {
                 print ("data is nil")
                 self.alertCompletion?()
-                return
-            }
+                return}
             
             do {
                 let decoder = JSONDecoder()
                 let item = try decoder.decode(WeatherDailyForecast.self, from: data)
                 completion(item)
-                
             } catch {
                 print (error)
             }
         }
-        
         dataTask.resume()
     }
     
 }
+
+//структуры для данных с openweathermap
 struct WeatherForecast : Decodable {
-    
     var city: CityDecodable
     var list: [ListItem]
 }
@@ -105,6 +96,8 @@ struct WeatherForecast : Decodable {
 struct CityDecodable: Decodable {
     var name: String
     var coord: Coord
+    var sunrise: Int
+    var sunset: Int
 }
 
 struct Coord: Codable {
@@ -112,12 +105,13 @@ struct Coord: Codable {
 }
 
 struct ListItem: Decodable {
-    
     var dt: Int
     var dt_txt: String
     var main: MainClass
     var weather: [WeatherDecodable]
     let wind: Wind
+    let clouds: Clouds
+    let pop: Double
 }
  
 struct MainClass: Decodable {
@@ -150,7 +144,12 @@ struct Wind: Decodable {
     let gust: Double
 }
 
+struct Clouds: Decodable {
+    let all: Int
+}
 
+
+//для данных с api Yandex
 struct WeatherDailyForecast: Decodable {
     var forecasts: [Forecasts]
 }
@@ -185,7 +184,6 @@ struct Day: Decodable {
     var prec_prob: Double
     var cloudness: Double
     var prec_strength: Double
-    //var uv_index: Double
 }
 
 struct Night: Decodable {
@@ -201,6 +199,4 @@ struct Night: Decodable {
     var prec_prob: Double
     var cloudness: Double
     var prec_strength: Double
-    //var uv_index: Double
 }
-

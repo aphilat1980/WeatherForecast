@@ -11,14 +11,12 @@ class DailySecondSectionTableViewCell: UITableViewCell {
 
     static let id = "DailySecondSectionTableViewCell_id"
     
-    
     private lazy var backDayView: UIView = {
         var view = UIView()
         view.layer.backgroundColor = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1).cgColor
         view.layer.cornerRadius = 5
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-        
     }()
     
     private lazy var backNightView: UIView = {
@@ -27,20 +25,15 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.layer.cornerRadius = 5
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-        
     }()
     
-   
-    
-    
-    private lazy var dayLabel: UILabel = {
+   private lazy var dayLabel: UILabel = {
         var view = UILabel()
         view.text = "День"
         view.font = UIFont(name: "Rubik-Regular", size: 18)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var dayAverageTemperature: UILabel = {
         var view = UILabel()
@@ -55,7 +48,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var dayWeatherIcon: UIImageView = {
         var view = UIImageView()
@@ -85,7 +77,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         return view
     }()
     
-    
     private lazy var dayWindIcon: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "windDark")
@@ -107,7 +98,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var dayRainIcon: UIImageView = {
         var view = UIImageView()
@@ -153,7 +143,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         return view
     }()
     
-
     private lazy var nightLabel: UILabel = {
         var view = UILabel()
         view.text = "Ночь"
@@ -161,7 +150,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var nightAverageTemperature: UILabel = {
         var view = UILabel()
@@ -206,7 +194,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         return view
     }()
     
-    
     private lazy var nightWindIcon: UIImageView = {
         var view = UIImageView()
         view.image = UIImage(named: "windDark")
@@ -228,7 +215,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var nightRainIcon: UIImageView = {
         var view = UIImageView()
@@ -274,7 +260,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         return view
     }()
     
-    
     private lazy var sunAndMoonLabel: UILabel = {
         var view = UILabel()
         view.font = UIFont(name: "Rubik-Regular", size: 18)
@@ -296,7 +281,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var sunIcon: UIImageView = {
         var view = UIImageView()
@@ -320,7 +304,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private lazy var sunRiseEndLabel: UILabel = {
         var view = UILabel()
@@ -361,7 +344,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         return view
     }()
     
-    
     private lazy var sunSetEndLabel: UILabel = {
         var view = UILabel()
         view.textColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
@@ -379,11 +361,8 @@ class DailySecondSectionTableViewCell: UITableViewCell {
     }()
     
    
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         
         contentView.backgroundColor = .white
         contentView.addSubview(backDayView)
@@ -426,22 +405,16 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         contentView.addSubview(moonText)
         contentView.addSubview(fullMoonIcon)
         contentView.addSubview(sunIcon)
-        
         contentView.addSubview(sunRiseBeginLabel)
         contentView.addSubview(sunRiseBegin)
         contentView.addSubview(sunRiseEndLabel)
         contentView.addSubview(sunRiseEnd)
-        
         contentView.addSubview(moonIcon)
-        
         contentView.addSubview(sunSetBeginLabel)
         contentView.addSubview(sunSetBegin)
         contentView.addSubview(sunSetEndLabel)
         contentView.addSubview(sunSetEnd)
-        
         setupConstraints()
-        
-
     }
     
     required init?(coder: NSCoder) {
@@ -486,7 +459,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         dayFeelsLikeTemperature.centerYAnchor.constraint(equalTo: dayFeelsLikeIcon.centerYAnchor).isActive = true
         dayFeelsLikeTemperature.trailingAnchor.constraint(equalTo: backDayView.trailingAnchor, constant: -15).isActive = true
         
-        
         dayWindIcon.topAnchor.constraint(equalTo: dayFeelsLikeIcon.bottomAnchor, constant: 26).isActive = true
         dayWindIcon.leadingAnchor.constraint(equalTo: dayFeelsLikeIcon.leadingAnchor).isActive = true
         dayWindIcon.heightAnchor.constraint(equalToConstant: 18).isActive = true
@@ -498,7 +470,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         dayWind.centerYAnchor.constraint(equalTo: dayWindIcon.centerYAnchor).isActive = true
         dayWind.trailingAnchor.constraint(equalTo: backDayView.trailingAnchor, constant: -15).isActive = true
         
-        
         dayRainIcon.topAnchor.constraint(equalTo: dayWindIcon.bottomAnchor, constant: 26).isActive = true
         dayRainIcon.leadingAnchor.constraint(equalTo: dayFeelsLikeIcon.leadingAnchor).isActive = true
         dayRainIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -509,7 +480,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         
         dayRain.centerYAnchor.constraint(equalTo: dayRainIcon.centerYAnchor).isActive = true
         dayRain.trailingAnchor.constraint(equalTo: backDayView.trailingAnchor, constant: -15).isActive = true
-        
         
         dayCloudnessIcon.topAnchor.constraint(equalTo: dayRainIcon.bottomAnchor, constant: 26).isActive = true
         dayCloudnessIcon.leadingAnchor.constraint(equalTo: dayFeelsLikeIcon.leadingAnchor).isActive = true
@@ -560,7 +530,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         nightWind.centerYAnchor.constraint(equalTo: nightWindIcon.centerYAnchor).isActive = true
         nightWind.trailingAnchor.constraint(equalTo: backNightView.trailingAnchor, constant: -15).isActive = true
         
-        
         nightRainIcon.topAnchor.constraint(equalTo: nightWindIcon.bottomAnchor, constant: 26).isActive = true
         nightRainIcon.leadingAnchor.constraint(equalTo: nightFeelsLikeIcon.leadingAnchor).isActive = true
         nightRainIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -571,7 +540,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         
         nightRain.centerYAnchor.constraint(equalTo: nightRainIcon.centerYAnchor).isActive = true
         nightRain.trailingAnchor.constraint(equalTo: backNightView.trailingAnchor, constant: -15).isActive = true
-        
         
         nightCloudnessIcon.topAnchor.constraint(equalTo: nightRainIcon.bottomAnchor, constant: 26).isActive = true
         nightCloudnessIcon.leadingAnchor.constraint(equalTo: nightFeelsLikeIcon.leadingAnchor).isActive = true
@@ -584,8 +552,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         nightCloudness.centerYAnchor.constraint(equalTo: nightCloudnessIcon.centerYAnchor).isActive = true
         nightCloudness.trailingAnchor.constraint(equalTo: backNightView.trailingAnchor, constant: -15).isActive = true
         
-        
-        
         sunAndMoonLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         sunAndMoonLabel.topAnchor.constraint(equalTo: backNightView.bottomAnchor, constant: 20).isActive = true
         
@@ -594,7 +560,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         
         fullMoonIcon.centerYAnchor.constraint(equalTo: sunAndMoonLabel.centerYAnchor).isActive = true
         fullMoonIcon.trailingAnchor.constraint(equalTo: moonText.leadingAnchor, constant: -5).isActive = true
-        
         
         sunIcon.topAnchor.constraint(equalTo: sunAndMoonLabel.bottomAnchor, constant: 17).isActive = true
         sunIcon.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35).isActive = true
@@ -607,7 +572,6 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         sunRiseEnd.centerYAnchor.constraint(equalTo: sunRiseEndLabel.centerYAnchor).isActive = true
         sunRiseEnd.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -15).isActive = true
         
-        
         moonIcon.centerYAnchor.constraint(equalTo: sunIcon.centerYAnchor).isActive = true
         moonIcon.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 25).isActive = true
         sunSetBeginLabel.centerYAnchor.constraint(equalTo: sunRiseBeginLabel.centerYAnchor).isActive = true
@@ -618,25 +582,16 @@ class DailySecondSectionTableViewCell: UITableViewCell {
         sunSetBegin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
         sunSetEnd.centerYAnchor.constraint(equalTo: sunSetEndLabel.centerYAnchor).isActive = true
         sunSetEnd.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-        
-        
     }
     
     public func configure (with dailyWeather: DailyWeather) {
         
         dayWeatherIcon.image = UIImage(named: dailyWeather.dayIcon!)
-        //dayAverageTemperature.text = "\(Int(dailyWeather.dayTempAvg))°"
         dayDescription.text = dailyWeather.dayCondition
-        //dayFeelsLikeTemperature.text = "\(Int(dailyWeather.dayFeelsLikeTemp))°"
-        dayWind.text = "\(dailyWeather.dayWindSpeed)m/s \(dailyWeather.dayWindDir!)"
         dayRain.text = "\(Int(dailyWeather.dayPrecStrengh*100))%"
         dayCloudness.text = "\(Int(dailyWeather.dayCloudness*100))%"
-        
         nightWeatherIcon.image = UIImage(named: dailyWeather.nightIcon!)
-        //nightAverageTemperature.text = "\(Int(dailyWeather.nightTempAvg))°"
         nightDescription.text = dailyWeather.nightCondition
-        //nightFeelsLikeTemperature.text = "\(Int(dailyWeather.nightFeelsLikeTemp))°"
-        nightWind.text = "\(dailyWeather.nightWindSpeed)m/s \(dailyWeather.nightWindDir!)"
         nightRain.text = "\(Int(dailyWeather.nightPrecStrengh*100))%"
         nightCloudness.text = "\(Int(dailyWeather.nightCloudness*100))%"
         moonText.text = dailyWeather.moonText
@@ -655,12 +610,13 @@ class DailySecondSectionTableViewCell: UITableViewCell {
             nightAverageTemperature.text = "\(Int(dailyWeather.nightTempAvg)*9/5+32)°F"
             dayFeelsLikeTemperature.text = "\(Int(dailyWeather.dayFeelsLikeTemp)*9/5+32)°F"
             nightFeelsLikeTemperature.text = "\(Int(dailyWeather.nightFeelsLikeTemp)*9/5+32)°F"
-            
-            
         }
-        
-        
-        
+        if UserDefaults.standard.string(forKey: "windspeed") == "M" {
+            dayWind.text = "\(dailyWeather.dayWindSpeed)m/s \(dailyWeather.dayWindDir!)"
+            nightWind.text = "\(dailyWeather.nightWindSpeed)m/s \(dailyWeather.nightWindDir!)"
+        } else {
+            dayWind.text = String(format: "%.1f km/h \(dailyWeather.dayWindDir!)", dailyWeather.dayWindSpeed*3.6)
+            nightWind.text = String(format: "%.1f km/h \(dailyWeather.nightWindDir!)", dailyWeather.nightWindSpeed*3.6)
+        }
     }
-
 }
